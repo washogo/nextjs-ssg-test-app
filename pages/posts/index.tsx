@@ -1,4 +1,5 @@
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
+import { useRouter } from 'next/router';
 
 export type Post = {
   userId: number;
@@ -18,12 +19,18 @@ export const getStaticProps: GetStaticProps<{ posts: Post[] }> = async () => {
 };
 
 const Posts = ({ posts }: InferGetStaticPropsType<typeof getStaticProps>) => {
+  const router = useRouter();
+
   return (
-    <div>
+    <div style={{ padding: '16px' }}>
       {posts.map((post) => (
-        <div key={post.id}>
-          <h2>{post.title}</h2>
-          <p>{post.body}</p>
+        <div
+          key={post.id}
+          style={{ display: 'flex', cursor: 'pointer' }}
+          onClick={() => router.push(`/posts/${post.id}`)}
+        >
+          <div>{post.id}：</div>
+          <div>{post.title}</div>
         </div>
       ))}
     </div>

@@ -18,7 +18,7 @@ export const getStaticProps: GetStaticProps<{ post: Post }> = async ({params}) =
 
 const PostById = ({ post }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
-    <div>
+    <div style={{ padding: '16px' }}>
       <h2>{post.title}</h2>
       <p>{post.body}</p>
     </div>
